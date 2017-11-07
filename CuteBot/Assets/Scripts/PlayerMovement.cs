@@ -15,17 +15,7 @@ public class PlayerMovement : MonoBehaviour
     float gravity;
 
     [SerializeField]
-    float pushForce = 2.0f;
-
-    [SerializeField]
     Transform spawnPosition;
-
-    [SerializeField]
-    float climbSpeed;
-
-    GameObject target;
-
-    bool canClimb = false;
 
     GameManager GM;
     ItemManager IM;
@@ -47,16 +37,6 @@ public class PlayerMovement : MonoBehaviour
             SceneManager.LoadScene("Scene1");
         }
 
-        if (canClimb)
-        {
-            if (Input.GetKey(KeyCode.W))
-            {
-               
-                moveDirection = new Vector3(0, Input.GetAxis("Vertical"), 0);
-                moveDirection *= climbSpeed;
-            }
-        }
-
         CharacterController controller = GetComponent<CharacterController>();
         if (controller.isGrounded)
         {
@@ -70,44 +50,18 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(moveDirection * Time.deltaTime);
 
     }
-    public void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        Rigidbody body = hit.collider.attachedRigidbody;
-        Vector3 direction = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
-
-        if (body == null || body.isKinematic)
-        {
-            return;
-        }
-        if (hit.moveDirection.y < -0.3f)
-        {
-            return;
-        }
-
-        Vector3 pushDirection = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
-        body.velocity = pushDirection * pushForce;
-    }
 
     void OnTriggerEnter(Collider other)
     {
-
-        if (other.tag == "Climbable")
+        //if (Input.GetKey(KeyCode.E))
+        //{
+        switch (other.tag)
         {
-            canClimb = true;
-            
+            case "Interactable":
+                break;
+            case "Climbable":
+                break;
         }
+        //}
     }
-
-
-    void OnTriggerExit(Collider other)
-    {
-
-        if (other.tag == "Climbable")
-        {
-            canClimb = false;
-            
-        }
-    }
-
-
 }

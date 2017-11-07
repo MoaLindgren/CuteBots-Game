@@ -4,8 +4,25 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
+    public float pushForce = 2.0f;
 
-   
+    public void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Rigidbody body = hit.collider.attachedRigidbody;
+        Vector3 direction = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+
+        if (body == null || body.isKinematic)
+        {
+            return;
+        }
+        if (hit.moveDirection.y < -0.3f)
+        {
+            return;
+        }
+
+        Vector3 pushDirection = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+        body.velocity = pushDirection * pushForce;
+    }
 
     /* public void IsMoveable(PlayerMovement player, Collider moveableObject)
      {
