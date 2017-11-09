@@ -18,9 +18,6 @@ public class PlayerManager : MonoBehaviour
     float pushForce = 2.0f;
 
     [SerializeField]
-    Transform spawnPosition;
-
-    [SerializeField]
     float climbSpeed;
 
     GameObject target;
@@ -29,7 +26,6 @@ public class PlayerManager : MonoBehaviour
     bool canDrag = false;
 
     GameManager GM;
-    ItemManager IM;
     CharacterController controller;
 
     private int maxFallDistance = -10;
@@ -38,7 +34,6 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
-        IM = new ItemManager();
         controller = GetComponent<CharacterController>();
     }
 
