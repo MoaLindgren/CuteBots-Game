@@ -889,7 +889,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1001 &2055985669
@@ -952,22 +952,22 @@ Prefab:
     - target: {fileID: 65416726272071082, guid: 35996cbaeb04f4f42b4b4af284d83e14,
         type: 2}
       propertyPath: m_Size.x
-      value: 1.7359207
+      value: 1.7847508
       objectReference: {fileID: 0}
     - target: {fileID: 65416726272071082, guid: 35996cbaeb04f4f42b4b4af284d83e14,
         type: 2}
       propertyPath: m_Center.x
-      value: -0.045390453
+      value: -0.019506782
       objectReference: {fileID: 0}
     - target: {fileID: 65416726272071082, guid: 35996cbaeb04f4f42b4b4af284d83e14,
         type: 2}
       propertyPath: m_Size.z
-      value: 1.7452552
+      value: 1.6906735
       objectReference: {fileID: 0}
     - target: {fileID: 65416726272071082, guid: 35996cbaeb04f4f42b4b4af284d83e14,
         type: 2}
       propertyPath: m_Center.z
-      value: 0.051040128
+      value: -0.004018753
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 35996cbaeb04f4f42b4b4af284d83e14, type: 2}
