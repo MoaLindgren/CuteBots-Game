@@ -26,9 +26,11 @@ public class PlayerMovement : MonoBehaviour
     GameObject target;
 
     bool canClimb = false;
+    bool canDrag = false;
 
     GameManager GM;
     ItemManager IM;
+    CharacterController controller;
 
     private int maxFallDistance = -10;
 
@@ -37,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         IM = new ItemManager();
+        controller = GetComponent<CharacterController>();
     }
 
     void Update()
@@ -51,18 +54,30 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.W))
             {
-               
+
                 moveDirection = new Vector3(0, Input.GetAxis("Vertical"), 0);
                 moveDirection *= climbSpeed;
             }
+
         }
 
-        CharacterController controller = GetComponent<CharacterController>();
+        if (canDrag)
+        {
+
+        }
+
         if (controller.isGrounded)
         {
             moveDirection = new Vector3(-Input.GetAxis("Vertical"), 0, Input.GetAxis("Horizontal"));
             moveDirection = transform.TransformDirection(moveDirection);
-            moveDirection *= movementSpeed;
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                moveDirection *= movementSpeed + 4;
+            }
+            else
+            {
+                moveDirection *= movementSpeed;
+            }
             if (Input.GetButton("Jump"))
                 moveDirection.y = jumpHeight;
         }
@@ -72,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void OnControllerColliderHit(ControllerColliderHit hit)
     {
+
         Rigidbody body = hit.collider.attachedRigidbody;
         Vector3 direction = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
 
@@ -86,6 +102,8 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 pushDirection = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
         body.velocity = pushDirection * pushForce;
+
+
     }
 
     void OnTriggerEnter(Collider other)
@@ -94,10 +112,28 @@ public class PlayerMovement : MonoBehaviour
         if (other.tag == "Climbable")
         {
             canClimb = true;
-            
+
+        }
+        if (other.tag == "Draggable")
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                float gravity = 5.0f;
+                float pullF = 10f;
+                Vector3 distance = (transform.position - other.gameObject.transform.position) / gravity; // line from crate to player
+                float dist = distance.magnitude;
+                Vector3 pullDir = distance.normalized;
+                /*  float pullForDist = (dist - (100)) / 1.0f;
+
+                  if (pullForDist > 10)
+                      pullForDist = 10;
+
+                  pullF += pullForDist;*/
+                other.gameObject.GetComponent<Rigidbody>().velocity += pullDir;
+
+            }
         }
     }
-
 
     void OnTriggerExit(Collider other)
     {
@@ -105,9 +141,14 @@ public class PlayerMovement : MonoBehaviour
         if (other.tag == "Climbable")
         {
             canClimb = false;
-            
+            moveDirection = new Vector3(0, 0, Input.GetAxis("Vertical"));
+        }
+        if (other.tag == "Draggable")
+        {
+
         }
     }
 
+    //    body.gameObject.transform.position = Vector3.Lerp(body.gameObject.transform.position, transform.position, 5);
 
 }
