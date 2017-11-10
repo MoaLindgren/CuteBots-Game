@@ -5,30 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
-    [SerializeField]
-    float movementSpeed;
+    bool canClimb = false;
+    bool canDrag = false;
+
+    private int maxFallDistance = -10;
 
     [SerializeField]
-    float jumpHeight;
+    float climbSpeed;
 
     [SerializeField]
     float gravity;
 
     [SerializeField]
-    float pushForce = 2.0f;
+    float jumpHeight;
 
     [SerializeField]
-    float climbSpeed;
+    float movementSpeed;
 
-    GameObject target;
-
-    bool canClimb = false;
-    bool canDrag = false;
+    [SerializeField]
+    float pushForce = 2.0f;
 
     GameManager GM;
-    CharacterController controller;
 
-    private int maxFallDistance = -10;
+    CharacterController controller;
 
     Vector3 moveDirection = Vector3.zero;
 
@@ -49,18 +48,18 @@ public class PlayerManager : MonoBehaviour
             SceneManager.LoadScene("Scene1");
         }
 
+        // Om vi kan klättra rör vi oss uppåt.
         if (canClimb)
         {
             if (Input.GetKey(KeyCode.W))
             {
-
                 moveDirection = new Vector3(0, Input.GetAxis("Vertical"), 0);
                 moveDirection *= climbSpeed;
             }
 
         }
 
-
+        //Rörelsekontroller för spelaren
         if (controller.isGrounded)
         {
             moveDirection = new Vector3(-Input.GetAxis("Vertical"), 0, Input.GetAxis("Horizontal"));
@@ -80,6 +79,8 @@ public class PlayerManager : MonoBehaviour
         controller.Move(moveDirection * Time.deltaTime);
 
     }
+
+    //Så spelaren kan flytta object genom att putta dem.
     public void OnControllerColliderHit(ControllerColliderHit hit)
     {
 
@@ -101,7 +102,7 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other) //När spelaren går in i collidern
     {
 
         if (other.tag == "Climbable")
@@ -120,18 +121,18 @@ public class PlayerManager : MonoBehaviour
             {
                 movementSpeed = 4.0f;
                 canDrag = true;
-                other.gameObject.transform.position = Vector3.MoveTowards(other.gameObject.transform.position, transform.position, step);
+                other.gameObject.transform.position = Vector3.MoveTowards(other.gameObject.transform.position, transform.position, step); //Får objektet att följa efter spelaren sålänge E hålls in
             }
         }
     }
 
-    void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other) //När spelaren lämnar collidern återställs tidigare värden
     {
 
         if (other.tag == "Climbable")
         {
             canClimb = false;
-            moveDirection = new Vector3(0, 0, Input.GetAxis("Vertical"));
+            moveDirection = new Vector3(0, 0, Input.GetAxis("Vertical")); 
         }
         if (other.tag == "Draggable")
         {
