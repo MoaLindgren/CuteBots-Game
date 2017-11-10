@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
     [SerializeField]
     float movementSpeed;
@@ -18,9 +18,6 @@ public class PlayerMovement : MonoBehaviour
     float pushForce = 2.0f;
 
     [SerializeField]
-    Transform spawnPosition;
-
-    [SerializeField]
     float climbSpeed;
 
     GameObject target;
@@ -29,7 +26,6 @@ public class PlayerMovement : MonoBehaviour
     bool canDrag = false;
 
     GameManager GM;
-    ItemManager IM;
     CharacterController controller;
 
     private int maxFallDistance = -10;
@@ -38,12 +34,15 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        IM = new ItemManager();
         controller = GetComponent<CharacterController>();
     }
 
     void Update()
     {
+        if(movementSpeed <=4 && !canDrag)
+        {
+            movementSpeed = 6;
+        }
 
         if (transform.position.y <= maxFallDistance)
         {
@@ -61,10 +60,6 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-        if (canDrag)
-        {
-
-        }
 
         if (controller.isGrounded)
         {
@@ -116,21 +111,16 @@ public class PlayerMovement : MonoBehaviour
         }
         if (other.tag == "Draggable")
         {
+            float speed = 4.0f;
+            float step = 2f;
+
+            step = Time.deltaTime * speed;
+
             if (Input.GetKey(KeyCode.E))
             {
-                float gravity = 5.0f;
-                float pullF = 10f;
-                Vector3 distance = (transform.position - other.gameObject.transform.position) / gravity; // line from crate to player
-                float dist = distance.magnitude;
-                Vector3 pullDir = distance.normalized;
-                /*  float pullForDist = (dist - (100)) / 1.0f;
-
-                  if (pullForDist > 10)
-                      pullForDist = 10;
-
-                  pullF += pullForDist;*/
-                other.gameObject.GetComponent<Rigidbody>().velocity += pullDir;
-
+                movementSpeed = 4.0f;
+                canDrag = true;
+                other.gameObject.transform.position = Vector3.MoveTowards(other.gameObject.transform.position, transform.position, step);
             }
         }
     }
@@ -145,10 +135,15 @@ public class PlayerMovement : MonoBehaviour
         }
         if (other.tag == "Draggable")
         {
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                canDrag = false;
+                movementSpeed = 6;
 
+            }
         }
     }
 
-    //    body.gameObject.transform.position = Vector3.Lerp(body.gameObject.transform.position, transform.position, 5);
+
 
 }
