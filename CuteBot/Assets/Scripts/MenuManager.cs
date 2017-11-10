@@ -6,16 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
@@ -38,4 +28,8 @@ public class MenuManager : MonoBehaviour {
         }
     }
 
+    public void ExitApplication()
+    {
+        Application.Quit();
+    }
 }

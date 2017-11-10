@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: b71aadcdb67ccf0468e7f25119d8353f
+timeCreated: 1510226797
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: PizzaBot
+  fontNames:
+  - PizzaBot
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -3,69 +3,63 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
-    [SerializeField]
-    float movementSpeed;
+    bool canClimb = false;
+    bool canDrag = false;
+
+    private int maxFallDistance = -10;
 
     [SerializeField]
-    float jumpHeight;
+    float climbSpeed;
 
     [SerializeField]
     float gravity;
 
     [SerializeField]
+    float jumpHeight;
+
+    [SerializeField]
+    float movementSpeed;
+
+    [SerializeField]
     float pushForce = 2.0f;
 
-    [SerializeField]
-    Transform spawnPosition;
-
-    [SerializeField]
-    float climbSpeed;
-
-    GameObject target;
-
-    bool canClimb = false;
-    bool canDrag = false;
-
     GameManager GM;
-    ItemManager IM;
-    CharacterController controller;
 
-    private int maxFallDistance = -10;
+    CharacterController controller;
 
     Vector3 moveDirection = Vector3.zero;
 
     void Start()
     {
-        IM = new ItemManager();
         controller = GetComponent<CharacterController>();
     }
 
     void Update()
     {
+        if(movementSpeed <=4 && !canDrag)
+        {
+            movementSpeed = 6;
+        }
 
         if (transform.position.y <= maxFallDistance)
         {
             SceneManager.LoadScene("Scene1");
         }
 
+        // Om vi kan klättra rör vi oss uppåt.
         if (canClimb)
         {
             if (Input.GetKey(KeyCode.W))
             {
-
                 moveDirection = new Vector3(0, Input.GetAxis("Vertical"), 0);
                 moveDirection *= climbSpeed;
             }
 
         }
 
-        if (canDrag)
-        {
-
-        }
-
+        //Rörelsekontroller för spelaren
         if (controller.isGrounded)
         {
             moveDirection = new Vector3(-Input.GetAxis("Vertical"), 0, Input.GetAxis("Horizontal"));
@@ -85,6 +79,8 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(moveDirection * Time.deltaTime);
 
     }
+
+    //Så spelaren kan flytta object genom att putta dem.
     public void OnControllerColliderHit(ControllerColliderHit hit)
     {
 
@@ -106,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other) //När spelaren går in i collidern
     {
 
         if (other.tag == "Climbable")
@@ -116,39 +112,39 @@ public class PlayerMovement : MonoBehaviour
         }
         if (other.tag == "Draggable")
         {
+            float speed = 4.0f;
+            float step = 2f;
+
+            step = Time.deltaTime * speed;
+
             if (Input.GetKey(KeyCode.E))
             {
-                float gravity = 5.0f;
-                float pullF = 10f;
-                Vector3 distance = (transform.position - other.gameObject.transform.position) / gravity; // line from crate to player
-                float dist = distance.magnitude;
-                Vector3 pullDir = distance.normalized;
-                /*  float pullForDist = (dist - (100)) / 1.0f;
-
-                  if (pullForDist > 10)
-                      pullForDist = 10;
-
-                  pullF += pullForDist;*/
-                other.gameObject.GetComponent<Rigidbody>().velocity += pullDir;
-
+                movementSpeed = 4.0f;
+                canDrag = true;
+                other.gameObject.transform.position = Vector3.MoveTowards(other.gameObject.transform.position, transform.position, step); //Får objektet att följa efter spelaren sålänge E hålls in
             }
         }
     }
 
-    void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other) //När spelaren lämnar collidern återställs tidigare värden
     {
 
         if (other.tag == "Climbable")
         {
             canClimb = false;
-            moveDirection = new Vector3(0, 0, Input.GetAxis("Vertical"));
+            moveDirection = new Vector3(0, 0, Input.GetAxis("Vertical")); 
         }
         if (other.tag == "Draggable")
         {
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                canDrag = false;
+                movementSpeed = 6;
 
+            }
         }
     }
 
-    //    body.gameObject.transform.position = Vector3.Lerp(body.gameObject.transform.position, transform.position, 5);
+
 
 }
