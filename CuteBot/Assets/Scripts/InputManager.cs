@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
 {
 
     GameObject pausMenu;
+    bool gameIsPaused;
 
     // Use this for initialization
     void Start()
@@ -25,13 +26,15 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             pausMenu.SetActive(!pausMenu.activeSelf);
-            if(pausMenu.activeInHierarchy == true)
+            if (pausMenu.activeInHierarchy == true)
             {
-            Time.timeScale = 0f; //Fryser tiden
+                Time.timeScale = 0f; //Fryser tiden
+                gameIsPaused = true;
             }
             else if (pausMenu.activeInHierarchy == false)
             {
                 Time.timeScale = 1f; //Ofryser tiden
+                gameIsPaused = false;
             }
         }
 
@@ -42,6 +45,12 @@ public class InputManager : MonoBehaviour
         pausMenu.SetActive(!pausMenu.activeSelf);
         Time.timeScale = 1f; //Ofryser tiden
     }
+
+    public bool GameIsPaused
+    {
+        get { return gameIsPaused; }
+    }
+
 
     public void LoadScene(string sceneName)
     {
