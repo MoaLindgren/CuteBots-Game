@@ -5,26 +5,44 @@ using UnityEngine.AI;
 
 public class AIBehaviour : MonoBehaviour
 {
-    public Transform target;
-    public GameObject player;
+    GameObject player;
+    GameObject GM;
     bool detectedPlayer;
     float movement;
-    float speed = 2.0f;
-    Transform[] navigation;
+    float speed = 5.0f;
+    float offsetX = 1.0f;
+    public Transform[] nodes;
+    int destinationPoints = 0;
     NavMeshAgent agent;
 
     void Start()
     {
-        navigation = new Transform[2];
         agent = GetComponent<NavMeshAgent>();
+        GM = GameObject.Find("GameManager");
+        player = GameObject.Find("TM8");
+        GameObject.FindGameObjectsWithTag("Node" + this.tag);
+
+    }
+
+    void GotoNextPoint()
+    {
+        if (nodes.Length == 0)
+        {
+            return;
+        }
+
+        agent.destination = nodes[destinationPoints].position;
+
+        destinationPoints = (destinationPoints + 1) % nodes.Length;
+
     }
 
 
-    void OnTriggerEnter(Collider range)
+    void OnTriggerEnter(Collider other)
     {
         movement = Time.deltaTime * speed;
 
-        if (range.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             detectedPlayer = true;
         }
@@ -34,19 +52,29 @@ public class AIBehaviour : MonoBehaviour
     void Update()
     {
 
-        if (detectedPlayer)
+        if (detectedPlayer && player.GetComponent<PlayerManager>().IsDetectable && !GM.GetComponent<InputManager>().GameIsPaused)
         {
-            Vector3 relativePosition = target.position - transform.position;
-            Quaternion rotation = Quaternion.LookRotation(relativePosition);
-            transform.rotation = rotation;
+            /*  Vector3 relativePosition = player.transform.position - transform.position;
+              Quaternion rotation = Quaternion.LookRotation(relativePosition);
+              transform.rotation = rotation; */ // till animation eventuellt
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movement);
 
+
         }
+
+        else if (!agent.pathPending && agent.remainingDistance < 0.5f)
+        {
+            GotoNextPoint();
+        }
+
     }
+
+
 
     void OnTriggerExit()
     {
+        detectedPlayer = false;
         movement = Time.deltaTime / speed;
-        transform.position = transform.position; //Gå tillbaka till navMesh positionen
+        //Gå tillbaka till navMesh positionen
     }
 }

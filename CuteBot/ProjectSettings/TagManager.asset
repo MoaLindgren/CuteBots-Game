@@ -7,6 +7,9 @@ TagManager:
   - Moveable
   - Climbable
   - Draggable
+  - Broken Door
+  - Locked Door
+  - Open Door
   layers:
   - Default
   - TransparentFX
