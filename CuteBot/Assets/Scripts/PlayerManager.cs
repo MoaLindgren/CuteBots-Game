@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour
 {
     bool canClimb = false;
     bool canDrag = false;
+    public bool isDetectable;
 
     private int maxFallDistance = -10;
 
@@ -31,9 +32,15 @@ public class PlayerManager : MonoBehaviour
 
     Vector3 moveDirection = Vector3.zero;
 
+    public bool IsDetectable
+    {
+        get { return isDetectable; }
+    }
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        isDetectable = true;
     }
 
     void Update()
