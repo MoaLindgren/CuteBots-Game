@@ -28,6 +28,10 @@ public class PlayerManager : MonoBehaviour
 
     GameManager GM;
 
+    GameObject currentStation;
+
+    GameObject station;
+
     CharacterController controller;
 
     Vector3 moveDirection = Vector3.zero;
@@ -35,17 +39,30 @@ public class PlayerManager : MonoBehaviour
     public bool IsDetectable
     {
         get { return isDetectable; }
+        set { isDetectable = value; }
     }
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        station = GameObject.Find("Station");
         isDetectable = true;
     }
 
     void Update()
     {
-        if(movementSpeed <=4 && !canDrag)
+        if (!IsDetectable)
+        {
+            currentStation.GetComponent<ItemManager>().StationHealth -= Time.deltaTime;
+            print(currentStation.GetComponent<ItemManager>().StationHealth);
+            if (currentStation.GetComponent<ItemManager>().StationHealth <= 0)
+            {
+                station.GetComponent<ItemManager>().TriggerCollider.enabled = false;
+                IsDetectable = true;
+            }
+        }
+
+        if (movementSpeed <= 4 && !canDrag)
         {
             movementSpeed = 6;
         }
@@ -131,6 +148,15 @@ public class PlayerManager : MonoBehaviour
                 other.gameObject.transform.position = Vector3.MoveTowards(other.gameObject.transform.position, transform.position, step); //Får objektet att följa efter spelaren sålänge E hålls in
             }
         }
+        if (other.tag == "Safezone")
+        {
+            if (Input.GetKey(KeyCode.E) && other.gameObject.GetComponent<ItemManager>().StationHealth > 0)
+            {
+                currentStation = other.gameObject;
+                isDetectable = false;
+
+            }
+        }
     }
 
     void OnTriggerExit(Collider other) //När spelaren lämnar collidern återställs tidigare värden
@@ -139,7 +165,7 @@ public class PlayerManager : MonoBehaviour
         if (other.tag == "Climbable")
         {
             canClimb = false;
-            moveDirection = new Vector3(0, 0, Input.GetAxis("Vertical")); 
+            moveDirection = new Vector3(0, 0, Input.GetAxis("Vertical"));
         }
         if (other.tag == "Draggable")
         {
@@ -149,6 +175,11 @@ public class PlayerManager : MonoBehaviour
                 movementSpeed = 6;
 
             }
+        }
+        if (other.tag == "Safezone")
+        {
+            currentStation = null;
+            isDetectable = true;
         }
     }
 

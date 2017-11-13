@@ -31,5 +31,11 @@ public class MenuManager : MonoBehaviour {
     public void ExitApplication()
     {
         Application.Quit();
+
+    }
+
+    public void OnValueChanged()
+    {
+        AudioListener.volume = 0.5f;
     }
 }

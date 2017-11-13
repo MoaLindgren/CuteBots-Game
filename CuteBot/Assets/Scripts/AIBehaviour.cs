@@ -20,7 +20,6 @@ public class AIBehaviour : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         GM = GameObject.Find("GameManager");
         player = GameObject.Find("TM8");
-        GameObject.FindGameObjectsWithTag("Node" + this.tag);
 
     }
 
