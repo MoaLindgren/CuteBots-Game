@@ -4,10 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Moveable
   - Climbable
-  - Draggable
   - Safezone
+  - Moveable
+  - Draggable
+  - Open Door
+  - Broken Door
+  - Locked Door
   layers:
   - Default
   - TransparentFX
