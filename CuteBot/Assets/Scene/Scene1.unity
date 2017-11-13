@@ -377,7 +377,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &271882250
 MonoBehaviour:
@@ -1863,8 +1863,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3d0f42944211f4ebbbb1fdff6fc94e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 271882245}
-  GM: {fileID: 814699553}
   nodes:
   - {fileID: 573687878}
   - {fileID: 735806570}
@@ -2357,7 +2355,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1555248674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 212.5, y: 119.5, z: 0}
+  m_LocalPosition: {x: 195.5, y: 110, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1517636871}
@@ -2942,7 +2940,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4439266555899964, guid: 35996cbaeb04f4f42b4b4af284d83e14, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1762519041469078, guid: 35996cbaeb04f4f42b4b4af284d83e14, type: 2}
       propertyPath: m_IsActive
