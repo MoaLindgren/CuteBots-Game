@@ -51,13 +51,20 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
-        if (!IsDetectable)
+        if (Input.GetKey(KeyCode.E) && currentStation != null)
         {
-            currentStation.GetComponent<ItemManager>().StationHealth -= Time.deltaTime;
-            print(currentStation.GetComponent<ItemManager>().StationHealth);
+            isDetectable = false;
+
+            if (currentStation.gameObject.GetComponent<ItemManager>().StationHealth > 0)
+            {
+                currentStation.GetComponent<ItemManager>().StationHealth -= Time.deltaTime;
+                print(currentStation.GetComponent<ItemManager>().StationHealth);
+
+            }
             if (currentStation.GetComponent<ItemManager>().StationHealth <= 0)
             {
                 station.GetComponent<ItemManager>().TriggerCollider.enabled = false;
+                currentStation = null;
                 IsDetectable = true;
             }
         }
@@ -150,12 +157,11 @@ public class PlayerManager : MonoBehaviour
         }
         if (other.tag == "Safezone")
         {
-            if (Input.GetKey(KeyCode.E) && other.gameObject.GetComponent<ItemManager>().StationHealth > 0)
+            if (other.gameObject.GetComponent<ItemManager>().StationHealth > 0)
             {
                 currentStation = other.gameObject;
-                isDetectable = false;
-
             }
+
         }
     }
 
