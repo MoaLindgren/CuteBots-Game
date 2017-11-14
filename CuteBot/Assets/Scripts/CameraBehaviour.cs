@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraBehaviour : MonoBehaviour
 {
@@ -13,8 +14,10 @@ public class CameraBehaviour : MonoBehaviour
 
     void LateUpdate() //Följer efter spelaren
     {
-
-        transform.position = new Vector3(GameObject.Find("TM8").transform.position.x + offsetX, GameObject.Find("TM8").transform.position.y + offsetY, transform.position.z);
+            transform.position = new Vector3(GameObject.Find("TM8").transform.position.x + offsetX, GameObject.Find("TM8").transform.position.y + offsetY, transform.position.z);
+       
     }
+
+
 
 }
