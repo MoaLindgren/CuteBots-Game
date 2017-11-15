@@ -14,7 +14,7 @@ public class CameraBehaviour : MonoBehaviour
 
     void LateUpdate() //Följer efter spelaren
     {
-            transform.position = new Vector3(GameObject.Find("TM8").transform.position.x + offsetX, GameObject.Find("TM8").transform.position.y + offsetY, transform.position.z);
+            transform.position = new Vector3(GameObject.Find("TM8Test").transform.position.x + offsetX, GameObject.Find("TM8Test").transform.position.y + offsetY, transform.position.z);
        
     }
 

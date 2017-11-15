@@ -51,6 +51,7 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
+
         if (Input.GetKey(KeyCode.E) && currentStation != null)
         {
             isDetectable = false;
@@ -76,7 +77,7 @@ public class PlayerManager : MonoBehaviour
 
         if (transform.position.y <= maxFallDistance)
         {
-            SceneManager.LoadScene("Scene1");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         // Om vi kan klättra rör vi oss uppåt.
@@ -86,6 +87,7 @@ public class PlayerManager : MonoBehaviour
             {
                 moveDirection = new Vector3(0, Input.GetAxis("Vertical"), 0);
                 moveDirection *= climbSpeed;
+
             }
 
         }
@@ -172,6 +174,7 @@ public class PlayerManager : MonoBehaviour
         {
             canClimb = false;
             moveDirection = new Vector3(0, 0, Input.GetAxis("Vertical"));
+
         }
         if (other.tag == "Draggable")
         {
