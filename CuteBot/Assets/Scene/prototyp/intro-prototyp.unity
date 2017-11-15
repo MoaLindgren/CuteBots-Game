@@ -904,6 +904,10 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1275221606383862, guid: f8ffd59e7324e3b4fa521ef6a6df542e, type: 2}
+      propertyPath: m_TagString
+      value: Locked Door
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f8ffd59e7324e3b4fa521ef6a6df542e, type: 2}
   m_IsPrefabParent: 0
@@ -1709,6 +1713,10 @@ Prefab:
     - target: {fileID: 4093187416199228, guid: f8ffd59e7324e3b4fa521ef6a6df542e, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 89.982
+      objectReference: {fileID: 0}
+    - target: {fileID: 1275221606383862, guid: f8ffd59e7324e3b4fa521ef6a6df542e, type: 2}
+      propertyPath: m_TagString
+      value: Broken Door
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f8ffd59e7324e3b4fa521ef6a6df542e, type: 2}
@@ -2595,6 +2603,10 @@ Prefab:
     - target: {fileID: 4093187416199228, guid: f8ffd59e7324e3b4fa521ef6a6df542e, type: 2}
       propertyPath: m_LocalScale.x
       value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1275221606383862, guid: f8ffd59e7324e3b4fa521ef6a6df542e, type: 2}
+      propertyPath: m_TagString
+      value: Open Door
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f8ffd59e7324e3b4fa521ef6a6df542e, type: 2}
