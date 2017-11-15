@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour
 
     GameManager GM;
 
-    GameObject currentStation;
+    GameObject currentStation, currentDragable;
 
     GameObject station;
 
@@ -51,6 +51,14 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKey(KeyCode.E) && canDrag && currentDragable != null)
+        {
+            float speed = 4.0f;
+            float step = 2f;
+            step = Time.deltaTime * speed;
+            movementSpeed = 4.0f;
+            currentDragable.transform.position = Vector3.MoveTowards(currentDragable.transform.position, transform.position, step); //Får objektet att följa efter spelaren sålänge E hålls in
+        }
 
         if (Input.GetKey(KeyCode.E) && currentStation != null)
         {
@@ -145,17 +153,8 @@ public class PlayerManager : MonoBehaviour
         }
         if (other.tag == "Draggable")
         {
-            float speed = 4.0f;
-            float step = 2f;
-
-            step = Time.deltaTime * speed;
-
-            if (Input.GetKey(KeyCode.E))
-            {
-                movementSpeed = 4.0f;
-                canDrag = true;
-                other.gameObject.transform.position = Vector3.MoveTowards(other.gameObject.transform.position, transform.position, step); //Får objektet att följa efter spelaren sålänge E hålls in
-            }
+            canDrag = true;
+            currentDragable = other.gameObject;
         }
         if (other.tag == "Safezone")
         {
@@ -178,12 +177,10 @@ public class PlayerManager : MonoBehaviour
         }
         if (other.tag == "Draggable")
         {
-            if (Input.GetKeyUp(KeyCode.E))
-            {
-                canDrag = false;
-                movementSpeed = 6;
+            canDrag = false;
+            currentDragable = null;
+            movementSpeed = 6;
 
-            }
         }
         if (other.tag == "Safezone")
         {
