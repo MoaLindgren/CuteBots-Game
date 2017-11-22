@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
 {
 
     GameObject pausMenu;
+    GameObject player;
     bool gameIsPaused;
 
     // Use this for initialization
@@ -14,6 +15,7 @@ public class InputManager : MonoBehaviour
     {
 
         pausMenu = GameObject.Find("PausMenu");
+        player = GameObject.Find("Player");
         pausMenu.SetActive(false);
         Time.timeScale = 1f;
 
@@ -51,6 +53,19 @@ public class InputManager : MonoBehaviour
         get { return gameIsPaused; }
     }
 
+    public void Save()
+    {
+        IOScript.ioScript.playerPositionX = player.transform.position.x;
+        IOScript.ioScript.playerPositionY = player.transform.position.y;
+        IOScript.ioScript.playerPositionZ = player.transform.position.z;
+    }
+
+    public void Load()
+    {
+        IOScript.ioScript.Load();
+        player.transform.position = new Vector3(IOScript.ioScript.playerPositionX, IOScript.ioScript.playerPositionY, IOScript.ioScript.playerPositionZ);
+
+    }
 
     public void LoadScene(string sceneName)
     {

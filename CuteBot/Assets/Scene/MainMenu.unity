@@ -914,8 +914,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2065990707}
-        m_MethodName: ToggleMenu
-        m_Mode: 2
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 282108584}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
@@ -925,8 +925,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 2065990707}
-        m_MethodName: ToggleMenu
-        m_Mode: 2
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 1204258918}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
@@ -941,6 +941,17 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 1305954926}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1635616133}
+        m_MethodName: Load
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1178,7 +1189,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 599622282}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 491.5, y: 201.5, z: 0}
+  m_LocalPosition: {x: 202, y: 113.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1566450256}
@@ -2905,6 +2916,54 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1612325821}
+--- !u!1001 &1635616132
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4022315267875502, guid: b914dec9adaef6e4fa61eb16dbfa13e1, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.0000019073486
+      objectReference: {fileID: 0}
+    - target: {fileID: 4022315267875502, guid: b914dec9adaef6e4fa61eb16dbfa13e1, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4022315267875502, guid: b914dec9adaef6e4fa61eb16dbfa13e1, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4022315267875502, guid: b914dec9adaef6e4fa61eb16dbfa13e1, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4022315267875502, guid: b914dec9adaef6e4fa61eb16dbfa13e1, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4022315267875502, guid: b914dec9adaef6e4fa61eb16dbfa13e1, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4022315267875502, guid: b914dec9adaef6e4fa61eb16dbfa13e1, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4022315267875502, guid: b914dec9adaef6e4fa61eb16dbfa13e1, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: b914dec9adaef6e4fa61eb16dbfa13e1, type: 2}
+  m_IsPrefabParent: 0
+--- !u!114 &1635616133 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114926166128196110, guid: b914dec9adaef6e4fa61eb16dbfa13e1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1635616132}
+  m_Script: {fileID: 11500000, guid: a9f2a5a94f7b56342a8b88f0125911d2, type: 3}
 --- !u!1 &1691248759
 GameObject:
   m_ObjectHideFlags: 0
@@ -3854,7 +3913,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2106124085}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 126.5, z: 0}
+  m_LocalPosition: {x: 0, y: 38.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 599622286}
