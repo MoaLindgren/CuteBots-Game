@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class IOScript : MonoBehaviour
 {
@@ -11,12 +12,13 @@ public class IOScript : MonoBehaviour
     public float playerPositionX;
     public float playerPositionY;
     public float playerPositionZ;
+    public Scene currentScene;
 
     void Awake()
     {
         if (ioScript == null)
         {
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(this.gameObject);
             ioScript = this;
         }
         else if (ioScript != this)
@@ -34,6 +36,8 @@ public class IOScript : MonoBehaviour
         playerData.playerPositionX = playerPositionX;
         playerData.playerPositionY = playerPositionY;
         playerData.playerPositionZ = playerPositionZ;
+        playerData.currentScene = currentScene;
+        print(playerData.currentScene);
 
         bf.Serialize(file, playerData);
         file.Close();
@@ -49,10 +53,13 @@ public class IOScript : MonoBehaviour
 
             PlayerData playerData = (PlayerData)bf.Deserialize(file);
             file.Close();
-
+            
             playerPositionX = playerData.playerPositionX;
             playerPositionY = playerData.playerPositionY;
             playerPositionZ = playerData.playerPositionZ;
+            currentScene = playerData.currentScene;
+            print(playerData.currentScene);
+
 
         }
     }
@@ -72,4 +79,5 @@ public class IOScript : MonoBehaviour
         public float playerPositionX;
         public float playerPositionY;
         public float playerPositionZ;
+        public Scene currentScene;
     }

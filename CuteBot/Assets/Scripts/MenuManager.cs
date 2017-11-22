@@ -6,6 +6,30 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour {
 
+    GameObject saveLoad;
+    GameObject pausMenu;
+    public Canvas canvas;
+
+    void Start()
+    {
+        saveLoad = GameObject.Find("SaveLoad");
+    }
+
+    void Awake()
+    {
+        if(saveLoad == null)
+        {
+            saveLoad = GameObject.Find("SaveLoad");
+        }
+
+        if (pausMenu == null)
+        {
+            pausMenu = GameObject.Find("PausMenu");
+            pausMenu.SetActive(false);
+            DontDestroyOnLoad(pausMenu);
+        }
+    }
+
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
