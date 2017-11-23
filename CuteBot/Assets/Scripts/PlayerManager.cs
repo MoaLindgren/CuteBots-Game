@@ -36,6 +36,8 @@ public class PlayerManager : MonoBehaviour
 
     Vector3 moveDirection = Vector3.zero;
 
+    Animator anim;
+
     public bool IsDetectable
     {
         get { return isDetectable; }
@@ -44,6 +46,7 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         station = GameObject.Find("Station");
         isDetectable = true;
@@ -51,6 +54,18 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
+        /*
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        anim.SetFloat("Speed", Mathf.Abs(horizontal));
+        anim.SetFloat("Speed", Mathf.Abs(vertical));
+        */
+
+        //if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        //{
+        //    //start transition
+        //}
         if (Input.GetKey(KeyCode.E) && canDrag && currentDragable != null)
         {
             float speed = 4.0f;
@@ -104,9 +119,19 @@ public class PlayerManager : MonoBehaviour
         if (controller.isGrounded)
         {
             moveDirection = new Vector3(-Input.GetAxis("Vertical"), 0, Input.GetAxis("Horizontal"));
+            if(Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f || Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f)
+            {
+                anim.SetBool("isRunning", true);
+            }
+            else
+            {
+                anim.SetBool("isRunning", false);
+            }
             moveDirection = transform.TransformDirection(moveDirection);
+            //runAnim.SetBool("running", true);
             if (Input.GetKey(KeyCode.LeftShift))
             {
+                
                 moveDirection *= movementSpeed + 4;
             }
             else
