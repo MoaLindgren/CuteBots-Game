@@ -2630,7 +2630,7 @@ GameObject:
   - component: {fileID: 819883794}
   - component: {fileID: 819883795}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: ZoneOfDeath
   m_TagString: Death Zone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2659,8 +2659,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.7093163, y: 2.0042572, z: 6.66679}
-  m_Center: {x: -1.0557346, y: 0.5021286, z: 1.430501}
+  m_Size: {x: 4.7093163, y: 2.0042572, z: 1.6118515}
+  m_Center: {x: -1.0557346, y: 0.5021286, z: 1.6849996}
 --- !u!1 &834383518
 GameObject:
   m_ObjectHideFlags: 0
@@ -4123,7 +4123,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4093187416199228, guid: f8ffd59e7324e3b4fa521ef6a6df542e, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -2.9
+      value: -9.71
       objectReference: {fileID: 0}
     - target: {fileID: 4093187416199228, guid: f8ffd59e7324e3b4fa521ef6a6df542e, type: 2}
       propertyPath: m_LocalRotation.x
@@ -4156,7 +4156,7 @@ Prefab:
     - target: {fileID: 114017922205930700, guid: f8ffd59e7324e3b4fa521ef6a6df542e,
         type: 2}
       propertyPath: lockedDoor
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1972428496778278, guid: f8ffd59e7324e3b4fa521ef6a6df542e, type: 2}
       propertyPath: m_StaticEditorFlags
@@ -4196,6 +4196,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1649418835418846, guid: f8ffd59e7324e3b4fa521ef6a6df542e, type: 2}
       propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114017922205930700, guid: f8ffd59e7324e3b4fa521ef6a6df542e,
+        type: 2}
+      propertyPath: keyCollected
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
