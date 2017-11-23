@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class AIBehaviour : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class AIBehaviour : MonoBehaviour
     bool detectedPlayer;
     float movement;
     float speed = 5.0f;
-    float offsetX = 1.0f;
+    float offsetX = 4.0f;
     public Transform[] nodes;
     int destinationPoints = 0;
     NavMeshAgent agent;
@@ -45,6 +46,7 @@ public class AIBehaviour : MonoBehaviour
         {
             detectedPlayer = true;
         }
+        
 
     }
 
@@ -53,9 +55,6 @@ public class AIBehaviour : MonoBehaviour
 
         if (detectedPlayer && player.GetComponent<PlayerManager>().IsDetectable && !GM.GetComponent<InputManager>().GameIsPaused)
         {
-            /*  Vector3 relativePosition = player.transform.position - transform.position;
-              Quaternion rotation = Quaternion.LookRotation(relativePosition);
-              transform.rotation = rotation; */ // till animation eventuellt
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movement);
 
 
@@ -67,7 +66,6 @@ public class AIBehaviour : MonoBehaviour
         }
 
     }
-
 
 
     void OnTriggerExit()

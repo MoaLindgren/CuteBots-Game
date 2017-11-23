@@ -4,11 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class MenuManager : MonoBehaviour {
+public class MenuManager : MonoBehaviour
+{
 
     GameObject saveLoad;
-    GameObject pausMenu;
-    public Canvas canvas;
 
     void Start()
     {
@@ -17,18 +16,13 @@ public class MenuManager : MonoBehaviour {
 
     void Awake()
     {
-        if(saveLoad == null)
+        if (saveLoad == null)
         {
             saveLoad = GameObject.Find("SaveLoad");
         }
 
-        if (pausMenu == null)
-        {
-            pausMenu = GameObject.Find("PausMenu");
-            pausMenu.SetActive(false);
-            DontDestroyOnLoad(pausMenu);
-        }
     }
+
 
     public void LoadScene(string sceneName)
     {
@@ -42,7 +36,7 @@ public class MenuManager : MonoBehaviour {
 
     public void Enlarge(Text text)
     {
-        if(text.fontSize == 30)
+        if (text.fontSize == 30)
         {
             text.fontSize = 40;
         }

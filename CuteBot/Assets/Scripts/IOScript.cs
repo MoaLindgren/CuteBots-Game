@@ -12,7 +12,6 @@ public class IOScript : MonoBehaviour
     public float playerPositionX;
     public float playerPositionY;
     public float playerPositionZ;
-    public Scene currentScene;
 
     void Awake()
     {
@@ -36,8 +35,6 @@ public class IOScript : MonoBehaviour
         playerData.playerPositionX = playerPositionX;
         playerData.playerPositionY = playerPositionY;
         playerData.playerPositionZ = playerPositionZ;
-        playerData.currentScene = currentScene;
-        print(playerData.currentScene);
 
         bf.Serialize(file, playerData);
         file.Close();
@@ -57,8 +54,7 @@ public class IOScript : MonoBehaviour
             playerPositionX = playerData.playerPositionX;
             playerPositionY = playerData.playerPositionY;
             playerPositionZ = playerData.playerPositionZ;
-            currentScene = playerData.currentScene;
-            print(playerData.currentScene);
+
 
 
         }
@@ -79,5 +75,4 @@ public class IOScript : MonoBehaviour
         public float playerPositionX;
         public float playerPositionY;
         public float playerPositionZ;
-        public Scene currentScene;
     }

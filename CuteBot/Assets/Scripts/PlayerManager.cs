@@ -164,6 +164,10 @@ public class PlayerManager : MonoBehaviour
             }
 
         }
+        if (other.tag == "Death Zone")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     void OnTriggerExit(Collider other) //När spelaren lämnar collidern återställs tidigare värden

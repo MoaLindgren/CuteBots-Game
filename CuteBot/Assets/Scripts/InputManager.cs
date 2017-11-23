@@ -15,22 +15,19 @@ public class InputManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
-        saveLoad = GameObject.Find("SaveLoad");
+        saveLoad = GameObject.Find("SaveManager");
         pausMenu = GameObject.Find("PausMenu");
+        player = GameObject.Find("Player");
         pausMenu.SetActive(false);
-        print(pausMenu);
         Time.timeScale = 1f;
 
+        saveLoad.GetComponent<SaveLoad>().Load(player);
+       
     }
 
     void Awake()
     {
 
-        DontDestroyOnLoad(pausMenu);
-        if (pausMenu == null)
-        {
-        }
         if (saveLoad == null)
         {
             saveLoad = GameObject.Find("SaveLoad");
