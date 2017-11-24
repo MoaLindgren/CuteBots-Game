@@ -5,19 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class CameraBehaviour : MonoBehaviour
 {
+    private GameObject player;
+    private Vector3 offset;
 
-    //public GameObject player;
-
-    private int offsetY = 7;
-    private int offsetX = 5;
-
-
-    void LateUpdate() //Följer efter spelaren
+    void Start()
     {
-            transform.position = new Vector3(GameObject.Find("TM8Test").transform.position.x + offsetX, GameObject.Find("TM8Test").transform.position.y + offsetY, transform.position.z);
-       
+        player = GameObject.Find("Player");
+        offset = transform.position - player.transform.position;
     }
 
-
-
+    void LateUpdate()
+    {
+        transform.position = player.transform.position + offset;
+    }
 }
+
+
+
+
+
+

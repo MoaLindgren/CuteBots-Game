@@ -11,6 +11,7 @@ TagManager:
   - Open Door
   - Broken Door
   - Locked Door
+  - Death Zone
   layers:
   - Default
   - TransparentFX

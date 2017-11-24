@@ -4,7 +4,25 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class MenuManager : MonoBehaviour {
+public class MenuManager : MonoBehaviour
+{
+
+    GameObject saveLoad;
+
+    void Start()
+    {
+        saveLoad = GameObject.Find("SaveLoad");
+    }
+
+    void Awake()
+    {
+        if (saveLoad == null)
+        {
+            saveLoad = GameObject.Find("SaveLoad");
+        }
+
+    }
+
 
     public void LoadScene(string sceneName)
     {
@@ -18,7 +36,7 @@ public class MenuManager : MonoBehaviour {
 
     public void Enlarge(Text text)
     {
-        if(text.fontSize == 30)
+        if (text.fontSize == 30)
         {
             text.fontSize = 40;
         }

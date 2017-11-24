@@ -30,10 +30,10 @@ public class DoorManager : MonoBehaviour {
 
         playerTag = "Player";
         guardTag = "Guard";
-        doorAnimation = "DoorAnimation";
+        doorAnimation = "Door_Open";
         doorStates = new string[] { "Broken Door", "Open Door", "Locked Door" };
 
-        playerManager = GameObject.Find("TM8").GetComponent<PlayerManager>();
+        playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
 
         SetValues();
     }
