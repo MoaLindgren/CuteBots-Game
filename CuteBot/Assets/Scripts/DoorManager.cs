@@ -67,27 +67,27 @@ public class DoorManager : MonoBehaviour {
     {
         if (this.brokenDoor)
         {
-            Debug.Log("This door is broken, you can't pass.");
+           
         }
         else if (!lockedDoor)
         {
-            Debug.Log("Door opens.");
+            
             anim.Play(doorAnimation);
         }
         else if (lockedDoor)
         {
             if (col.gameObject.tag == guardTag)
             {
-                Debug.Log("You are a guard and can pass any door C:");
+                
                 anim.Play(doorAnimation);
             }
             if (col.gameObject.tag == playerTag)
             {
-                Debug.Log("This door is locked!");
+                
                 //this.keyCollected = playerManager.key;
                 if (keyCollected)
                 {
-                    Debug.Log("Seems like you have a key, let's open the door!");
+                    
                     anim.Play(doorAnimation);
                     this.lockedDoor = false;
                   //  playerManager.key = false;
