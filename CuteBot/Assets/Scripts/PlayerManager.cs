@@ -28,15 +28,17 @@ public class PlayerManager : MonoBehaviour
 
     GameManager GM;
 
-    GameObject currentStation, currentDragable;
+    GameObject currentStation, currentDragable, station;
 
-    GameObject station;
+    public GameObject model;
 
     CharacterController controller;
 
     Vector3 moveDirection = Vector3.zero;
 
     Animator anim;
+
+    bool pulling = false;
 
     public bool IsDetectable
     {
@@ -54,6 +56,7 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
+
         /*
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
@@ -66,32 +69,7 @@ public class PlayerManager : MonoBehaviour
         //{
         //    //start transition
         //}
-        if (Input.GetKey(KeyCode.E) && canDrag && currentDragable != null)
-        {
-            float speed = 4.0f;
-            float step = 2f;
-            step = Time.deltaTime * speed;
-            movementSpeed = 4.0f;
-            currentDragable.transform.position = Vector3.MoveTowards(currentDragable.transform.position, transform.position, step); //Får objektet att följa efter spelaren sålänge E hålls in
-        }
 
-        if (Input.GetKey(KeyCode.E) && currentStation != null)
-        {
-            isDetectable = false;
-
-            if (currentStation.gameObject.GetComponent<ItemManager>().StationHealth > 0)
-            {
-                currentStation.GetComponent<ItemManager>().StationHealth -= Time.deltaTime;
-                print(currentStation.GetComponent<ItemManager>().StationHealth);
-
-            }
-            if (currentStation.GetComponent<ItemManager>().StationHealth <= 0)
-            {
-                station.GetComponent<ItemManager>().TriggerCollider.enabled = false;
-                currentStation = null;
-                IsDetectable = true;
-            }
-        }
 
         if (movementSpeed <= 4 && !canDrag)
         {
@@ -110,7 +88,6 @@ public class PlayerManager : MonoBehaviour
             {
                 moveDirection = new Vector3(0, Input.GetAxis("Vertical"), 0);
                 moveDirection *= climbSpeed;
-
             }
 
         }
@@ -118,28 +95,79 @@ public class PlayerManager : MonoBehaviour
         //Rörelsekontroller för spelaren
         if (controller.isGrounded)
         {
+            if (Input.GetKey(KeyCode.E) && canDrag && currentDragable != null)
+            {
+                float speed = 4.0f;
+                float step = 2f;
+
+                if (!pulling)
+                {
+                    anim.SetBool("isPulling", true);
+                    pulling = true;
+                }
+
+                step = Time.deltaTime * speed;
+                movementSpeed = 4.0f;
+                currentDragable.transform.position = Vector3.MoveTowards(currentDragable.transform.position, transform.position, step); //Får objektet att följa efter spelaren sålänge E hålls in
+            }
+
+            if (Input.GetKey(KeyCode.Mouse0) && currentStation != null && !pulling)
+            {
+                isDetectable = false;
+
+                if (currentStation.gameObject.GetComponent<ItemManager>().StationHealth > 0)
+                {
+                    currentStation.GetComponent<ItemManager>().StationHealth -= Time.deltaTime;
+                    print(currentStation.GetComponent<ItemManager>().StationHealth);
+                    anim.SetBool("isHammering", true);
+
+                }
+                if (currentStation.GetComponent<ItemManager>().StationHealth <= 0)
+                {
+                    station.GetComponent<ItemManager>().TriggerCollider.enabled = false;
+                    currentStation = null;
+                    IsDetectable = true;
+                    anim.SetBool("isHammering", false);
+                }
+            }
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                anim.SetBool("isPulling", false);
+                pulling = false;
+            }
+            if (Input.GetKeyUp(KeyCode.Mouse0))
+                anim.SetBool("isHammering", false);
+
             moveDirection = new Vector3(-Input.GetAxis("Vertical"), 0, Input.GetAxis("Horizontal"));
-            if(Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f || Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f)
+
+            if (Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f || Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f && !pulling)
             {
                 anim.SetBool("isRunning", true);
             }
-            else
+            else if (!pulling)
             {
                 anim.SetBool("isRunning", false);
             }
             moveDirection = transform.TransformDirection(moveDirection);
+            if (moveDirection != Vector3.zero)
+            {
+                model.transform.rotation = Quaternion.LookRotation(moveDirection);
+            }
             //runAnim.SetBool("running", true);
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                
+
                 moveDirection *= movementSpeed + 4;
             }
             else
             {
                 moveDirection *= movementSpeed;
             }
-            if (Input.GetButton("Jump"))
+            if (Input.GetButton("Jump") && !pulling)
+            {
                 moveDirection.y = jumpHeight;
+
+            }
         }
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
@@ -180,9 +208,11 @@ public class PlayerManager : MonoBehaviour
         {
             canDrag = true;
             currentDragable = other.gameObject;
+
         }
         if (other.tag == "Safezone")
         {
+
             if (other.gameObject.GetComponent<ItemManager>().StationHealth > 0)
             {
                 currentStation = other.gameObject;
@@ -210,9 +240,12 @@ public class PlayerManager : MonoBehaviour
             currentDragable = null;
             movementSpeed = 6;
 
+            anim.SetBool("isPulling", false);
+
         }
         if (other.tag == "Safezone")
         {
+            anim.SetBool("isHammering", false);
             currentStation = null;
             isDetectable = true;
         }
