@@ -9,7 +9,6 @@ public class PlayerManager : MonoBehaviour
     bool canDrag = false;
     public bool isDetectable;
 
-    private int maxFallDistance = -10;
 
     [SerializeField]
     float climbSpeed;
@@ -50,35 +49,16 @@ public class PlayerManager : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
-        station = GameObject.Find("Station");
+        station = GameObject.Find("Workbench");
         isDetectable = true;
     }
 
     void Update()
     {
 
-        /*
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-
-        anim.SetFloat("Speed", Mathf.Abs(horizontal));
-        anim.SetFloat("Speed", Mathf.Abs(vertical));
-        */
-
-        //if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
-        //{
-        //    //start transition
-        //}
-
-
         if (movementSpeed <= 4 && !canDrag)
         {
-            movementSpeed = 6;
-        }
-
-        if (transform.position.y <= maxFallDistance)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            movementSpeed = 5;
         }
 
         // Om vi kan klättra rör vi oss uppåt.
@@ -89,29 +69,28 @@ public class PlayerManager : MonoBehaviour
                 moveDirection = new Vector3(0, Input.GetAxis("Vertical"), 0);
                 moveDirection *= climbSpeed;
             }
-
         }
 
         //Rörelsekontroller för spelaren
         if (controller.isGrounded)
         {
+            if (anim.GetBool("isJumping"))
+            {
+                anim.SetBool("isJumping", false);
+            }
+
             if (Input.GetKey(KeyCode.E) && canDrag && currentDragable != null)
             {
+                anim.SetBool("isPulling", true);
+                pulling = true;
                 float speed = 4.0f;
                 float step = 2f;
-
-                if (!pulling)
-                {
-                    anim.SetBool("isPulling", true);
-                    pulling = true;
-                }
-
                 step = Time.deltaTime * speed;
-                movementSpeed = 4.0f;
+                movementSpeed = 3.0f;
                 currentDragable.transform.position = Vector3.MoveTowards(currentDragable.transform.position, transform.position, step); //Får objektet att följa efter spelaren sålänge E hålls in
             }
 
-            if (Input.GetKey(KeyCode.Mouse0) && currentStation != null && !pulling)
+            if (Input.GetKey(KeyCode.Mouse0) && currentStation != null)
             {
                 isDetectable = false;
 
@@ -120,7 +99,6 @@ public class PlayerManager : MonoBehaviour
                     currentStation.GetComponent<ItemManager>().StationHealth -= Time.deltaTime;
                     print(currentStation.GetComponent<ItemManager>().StationHealth);
                     anim.SetBool("isHammering", true);
-
                 }
                 if (currentStation.GetComponent<ItemManager>().StationHealth <= 0)
                 {
@@ -153,11 +131,9 @@ public class PlayerManager : MonoBehaviour
             {
                 model.transform.rotation = Quaternion.LookRotation(moveDirection);
             }
-            //runAnim.SetBool("running", true);
             if (Input.GetKey(KeyCode.LeftShift))
             {
-
-                moveDirection *= movementSpeed + 4;
+                moveDirection *= movementSpeed + 2;
             }
             else
             {
@@ -165,13 +141,15 @@ public class PlayerManager : MonoBehaviour
             }
             if (Input.GetButton("Jump") && !pulling)
             {
+                anim.SetBool("isRunning", false);
+                anim.SetBool("isJumping", true);
+
                 moveDirection.y = jumpHeight;
 
             }
         }
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
-
     }
 
     //Så spelaren kan flytta object genom att putta dem.
@@ -192,8 +170,6 @@ public class PlayerManager : MonoBehaviour
 
         Vector3 pushDirection = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
         body.velocity = pushDirection * pushForce;
-
-
     }
 
     void OnTriggerEnter(Collider other) //När spelaren går in i collidern
@@ -202,23 +178,22 @@ public class PlayerManager : MonoBehaviour
         if (other.tag == "Climbable")
         {
             canClimb = true;
-
         }
+
         if (other.tag == "Draggable")
         {
             canDrag = true;
             currentDragable = other.gameObject;
-
         }
+
         if (other.tag == "Safezone")
         {
-
             if (other.gameObject.GetComponent<ItemManager>().StationHealth > 0)
             {
                 currentStation = other.gameObject;
             }
-
         }
+
         if (other.tag == "Death Zone")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -232,8 +207,8 @@ public class PlayerManager : MonoBehaviour
         {
             canClimb = false;
             moveDirection = new Vector3(0, 0, Input.GetAxis("Vertical"));
-
         }
+
         if (other.tag == "Draggable")
         {
             canDrag = false;
@@ -241,8 +216,8 @@ public class PlayerManager : MonoBehaviour
             movementSpeed = 6;
 
             anim.SetBool("isPulling", false);
-
         }
+
         if (other.tag == "Safezone")
         {
             anim.SetBool("isHammering", false);
@@ -250,7 +225,6 @@ public class PlayerManager : MonoBehaviour
             isDetectable = true;
         }
     }
-
 
 
 }

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 55b3926fc14234b4f96cd58bc951ef53
-timeCreated: 1511526055
+guid: 7c6d2f0133be1c443b5b5aa0bf95119d
+timeCreated: 1511538991
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -123,7 +123,7 @@ ModelImporter:
     400112: R_toe_JNT
     400114: R_wrist_JNT
     400116: //RootNode
-    7400000: Pull
+    7400000: bETTERpROBLEM
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -153,10 +153,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Pull
+      name: bETTERpROBLEM
       takeName: Take 001
-      firstFrame: 41
-      lastFrame: 80
+      firstFrame: 6.4000006
+      lastFrame: 12.2
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
