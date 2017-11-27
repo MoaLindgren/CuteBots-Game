@@ -7,26 +7,30 @@ using UnityEngine.SceneManagement;
 public class SoundManager : MonoBehaviour
 {
 
-                       //Ljudeffekter
+                       
     public AudioSource musicPlayer;
-
+    public AudioSource sfxPlayer;
+    public AudioSource guardPlayer;
     
     public AudioClip menuMusic;
-    public List <AudioClip> levelMusic;
+    public List<AudioClip> levelMusic;
     public List<AudioClip> mcSfx;
     public List<AudioClip> guardSfx;
     public List<AudioClip> kompisSfx;
+    public List<AudioClip> ambience;
 
     SoundManager SM;
+    PlayerManager PM;
+    
 
     public GameObject menuCanvas;
 
     public Slider volumeSlider;
     public static float volume;
-    [SerializeField] static SoundManager instance = null; //Scripts kan hämta funktioner från SoundManager
+   // [SerializeField] static SoundManager mcSound = null; //Scripts kan hämta funktioner från SoundManager
 
-    public float lowPitchRange = 0.95f;
-    public float highPitchRange = 1.05f;         //Använd för ljudeffekter?
+    public float lowPitchRange = 0.55f;
+    public float highPitchRange = 1.55f;         //Använd för ljudeffekter?
 
 
     void OnEnable()
@@ -64,23 +68,22 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
+        
 
+            
         if (SM == null)
 
             SM = this;
 
         else if (SM != this)
             Destroy(gameObject);
-        
-      
+ 
         DontDestroyOnLoad(gameObject);
         
         musicPlayer.volume = volumeSlider.value;
 
-   
-
-       
-       
+        PM = new PlayerManager();
+        PM.controller = GetComponent<CharacterController>();
     }
 
     /*
@@ -94,7 +97,21 @@ public class SoundManager : MonoBehaviour
         sfx.Play();
     }
     */
-
+  /*  
+    public void Update()
+    {
+        if ()
+        if (PM.controller.isGrounded == true && PM.controller.velocity.magnitude > 6 && sfxPlayer.isPlaying == false)
+        {
+            sfxPlayer.clip = mcSfx[0];
+            sfxPlayer.pitch = Random.Range(lowPitchRange, highPitchRange);
+            sfxPlayer.volume = Random.Range(lowPitchRange, highPitchRange);
+            sfxPlayer.Play();
+            
+        }
+        
+    }
+    */
     public void VolumeSetting()
     {
         musicPlayer.volume = volumeSlider.value;

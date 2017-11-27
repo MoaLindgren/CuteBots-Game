@@ -9,6 +9,10 @@ public class PlayerManager : MonoBehaviour
     bool canDrag = false;
     public bool isDetectable;
 
+   
+
+    SoundManager mcSound;
+
     private int maxFallDistance = -10;
 
     [SerializeField]
@@ -21,7 +25,7 @@ public class PlayerManager : MonoBehaviour
     float jumpHeight;
 
     [SerializeField]
-    float movementSpeed;
+    public float movementSpeed;
 
     [SerializeField]
     float pushForce = 2.0f;
@@ -32,7 +36,9 @@ public class PlayerManager : MonoBehaviour
 
     GameObject station;
 
-    CharacterController controller;
+   // GameObject manager;
+
+    public CharacterController controller;
 
     Vector3 moveDirection = Vector3.zero;
 
@@ -46,12 +52,25 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
+      
         anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         station = GameObject.Find("Station");
         isDetectable = true;
+      //  manager = GameObject.Find("Manager");
+        mcSound = GameObject.Find("Manager").GetComponent<SoundManager>();
     }
+    /*
+    void RunSound()
+    {
 
+        playerSounds = GetComponent<AudioSource>();
+        while (something)
+        playerSounds.GetComponent<SoundManager>();
+        playerSounds.clip = mcSound.mcSfx[0];
+        playerSounds.Play();
+    }
+    */
     void Update()
     {
         /*
@@ -130,9 +149,9 @@ public class PlayerManager : MonoBehaviour
             moveDirection = transform.TransformDirection(moveDirection);
             //runAnim.SetBool("running", true);
             if (Input.GetKey(KeyCode.LeftShift))
-            {
-                
+            {                
                 moveDirection *= movementSpeed + 4;
+                
             }
             else
             {
@@ -140,6 +159,28 @@ public class PlayerManager : MonoBehaviour
             }
             if (Input.GetButton("Jump"))
                 moveDirection.y = jumpHeight;
+
+            
+            if (anim.isRunning == true)
+            {
+                mcSound.sfxPlayer.clip = mcSound.mcSfx[0];
+                mcSound.sfxPlayer.pitch = Random.Range(mcSound.lowPitchRange, mcSound.highPitchRange);          //Testa om detta funkar istället för velocityskiten
+                mcSound.sfxPlayer.volume = Random.Range(mcSound.lowPitchRange, mcSound.highPitchRange);
+
+            }
+
+            if (controller.velocity.magnitude > 2 && mcSound.sfxPlayer.isPlaying == false)
+            {
+                mcSound.sfxPlayer.clip = mcSound.mcSfx[0];
+                 mcSound.sfxPlayer.pitch = Random.Range(mcSound.lowPitchRange, mcSound.highPitchRange);
+                 mcSound.sfxPlayer.volume = Random.Range(mcSound.lowPitchRange, mcSound.highPitchRange);
+
+                mcSound.sfxPlayer.PlayDelayed(0.37f);      
+                
+              
+            }
+            
+           
         }
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
