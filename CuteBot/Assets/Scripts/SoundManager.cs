@@ -20,7 +20,7 @@ public class SoundManager : MonoBehaviour
     public List<AudioClip> ambience;
 
     SoundManager SM;
-    PlayerManager PM;
+  //  PlayerManager PM;
     
 
     public GameObject menuCanvas;
@@ -82,8 +82,8 @@ public class SoundManager : MonoBehaviour
         
         musicPlayer.volume = volumeSlider.value;
 
-        PM = new PlayerManager();
-        PM.controller = GetComponent<CharacterController>();
+       // PM = new PlayerManager();
+       // PM.controller = GetComponent<CharacterController>();
     }
 
     /*

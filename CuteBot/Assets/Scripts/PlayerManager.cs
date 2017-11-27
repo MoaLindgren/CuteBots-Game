@@ -173,7 +173,7 @@ public class PlayerManager : MonoBehaviour
                  mcSound.sfxPlayer.pitch = Random.Range(mcSound.lowPitchRange, mcSound.highPitchRange);
                  mcSound.sfxPlayer.volume = Random.Range(mcSound.lowPitchRange, mcSound.highPitchRange);
 
-                mcSound.sfxPlayer.PlayDelayed(0.37f);
+                mcSound.sfxPlayer.PlayDelayed(0.365f);
             }
             
            
