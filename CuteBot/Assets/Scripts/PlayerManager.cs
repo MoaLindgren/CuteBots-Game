@@ -68,6 +68,9 @@ public class PlayerManager : MonoBehaviour
             {
                 moveDirection = new Vector3(0, Input.GetAxis("Vertical"), 0);
                 moveDirection *= climbSpeed;
+                anim.SetBool("isRunning", false);
+                anim.SetBool("isJumping", false);
+                anim.SetBool("isClimbing", true);
             }
         }
 
@@ -121,13 +124,14 @@ public class PlayerManager : MonoBehaviour
             if (Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f || Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f && !pulling)
             {
                 anim.SetBool("isRunning", true);
+                anim.SetBool("isClimbing", false);
             }
             else if (!pulling)
             {
                 anim.SetBool("isRunning", false);
             }
             moveDirection = transform.TransformDirection(moveDirection);
-            if (moveDirection != Vector3.zero)
+            if (moveDirection != Vector3.zero && !pulling)
             {
                 model.transform.rotation = Quaternion.LookRotation(moveDirection);
             }
@@ -139,11 +143,10 @@ public class PlayerManager : MonoBehaviour
             {
                 moveDirection *= movementSpeed;
             }
-            if (Input.GetButton("Jump") && !pulling)
+            if (Input.GetButton("Jump") && !pulling && !anim.GetBool("isClimbing"))
             {
-                anim.SetBool("isRunning", false);
                 anim.SetBool("isJumping", true);
-
+                anim.SetBool("isRunning", false);
                 moveDirection.y = jumpHeight;
 
             }
@@ -225,6 +228,5 @@ public class PlayerManager : MonoBehaviour
             isDetectable = true;
         }
     }
-
 
 }
