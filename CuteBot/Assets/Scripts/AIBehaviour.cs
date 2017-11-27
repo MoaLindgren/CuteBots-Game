@@ -67,7 +67,7 @@ public class AIBehaviour : MonoBehaviour
 
         }
 
-        else if (!agent.pathPending && agent.remainingDistance < 0.5f)
+        else if (!agent.pathPending && agent.remainingDistance < 0.6f)
         {
             GotoNextPoint();
         }

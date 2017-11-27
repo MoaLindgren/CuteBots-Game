@@ -55,6 +55,13 @@
     phrase ="TM-8: See you then!"/>
   <!--Slut på första scenen-->
 
+  <Place4_Dialogue0_Alternative0
+    branch ="0"
+    newBranch ="0"
+    phrase ="TM-8: BRB dude, I'll try my best to save you. Stay put!"/>
+    
+
+
   <!--Mötet med en trasig, ensam robot-->
   <Place6_Dialogue0_Alternative0
     branch ="0"

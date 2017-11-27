@@ -48,15 +48,16 @@ public class DialogueManager : MonoBehaviour
 
     void Start()
     {
+
         endConversation = false;
 
         //Om något går fel i koden är det med stor sannolikhet någonting här som inte stämmer ihop med Unity:
         canvas = GameObject.Find("Canvas");
-        dialogueFolder = canvas.transform.GetChild(1).gameObject;
+        dialogueFolder = canvas.transform.GetChild(0).gameObject;
 
         dialogueBox = dialogueFolder.transform.GetChild(2).gameObject;
         dialogueBox_Text = dialogueBox.transform.GetChild(0).transform.GetChild(0).GetComponentInChildren<Text>();
-
+        
         dialogueBox.SetActive(false);
 
         text = dialogueFolder.transform.GetChild(0).gameObject;
@@ -79,6 +80,7 @@ public class DialogueManager : MonoBehaviour
 
         altList = new List<string>();
         everythingSaid = new List<string>();
+        text.SetActive(false);
 
         for (int i = 0; i < maxAlternatives; i++)
         {
@@ -86,22 +88,24 @@ public class DialogueManager : MonoBehaviour
         }
 
         //Ändra följande värde och ta bort kommentar för att kunna testa dialogsystemet utan att gå runt i spelet.
-        placeNumber = 0;
+        //placeNumber = 2;
 
         //Sätt även denna aktiv för att testa dialog-systemet utan att faktiskt gå runt i spelet.
-        StartPhrase();
+        //StartPhrase(placeNumber);
     }
-    void Update()
+    /*void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
             dialogueBox.SetActive(!dialogueBox.activeSelf);
         }
-    }
+    }*/
 
 
-    void StartPhrase()
+    public void StartPhrase(int x)
     {
+        placeNumber = x;
+        text.SetActive(true);
         firstPhrase_Stream = new FileStream(firstPath, FileMode.Open);
         read_FirstXMLPath = XmlReader.Create(firstPhrase_Stream);
         while (read_FirstXMLPath.Read())
@@ -112,16 +116,16 @@ public class DialogueManager : MonoBehaviour
                 string tempString = uiText.text;
                 dialogueBox_Text.text = dialogueBox_Text.text + tempString;
 
-
+                if (read_FirstXMLPath.GetAttribute("end") == "true")
+                {
+                    endConversation = true;
+                }
                 everythingSaid.Add(uiText.text);
             }
         }
         firstPhrase_Stream.Close();
         StartCoroutine(PlayerTalk());
     }
-
-
-
 
     IEnumerator PlayerTalk()
     {
@@ -181,6 +185,7 @@ public class DialogueManager : MonoBehaviour
             }
         }
         uiText.text = allButtons[alternative].GetComponentInChildren<Text>().text;
+        print(alternative);
         string tempString = uiText.text;
         dialogueBox_Text.text = dialogueBox_Text.text + "\n" + tempString;
         everythingSaid.Add(uiText.text);

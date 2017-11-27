@@ -18,10 +18,10 @@ public class InputManager : MonoBehaviour
         saveLoad = GameObject.Find("SaveManager");
         pausMenu = GameObject.Find("PausMenu");
         player = GameObject.Find("Player");
-        pausMenu.SetActive(false);
+        //pausMenu.SetActive(false);
         Time.timeScale = 1f;
 
-        saveLoad.GetComponent<SaveLoad>().Load(player);
+        //saveLoad.GetComponent<SaveLoad>().Load(player);
        
     }
 

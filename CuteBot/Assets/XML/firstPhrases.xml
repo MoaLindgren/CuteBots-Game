@@ -18,7 +18,8 @@
 
   <!--Trigger: OM spelaren har valt den väg som leder till ett stort rum där DR sitter.-->
   <Place4
-    phrase ="They told me they were gonna fix me, but now I don’t know what’s going on. There is something weird going on! I don’t want to be “fixed”!"/>
+    phrase ="They told me they were gonna fix me, but now I don’t know what’s going on. There is something weird going on! I don’t want to be “fixed”!"
+    end ="true"/>
 
   <!--Trigger: OM CutScene4 är klar och golvet har börjat röra sig åt sidan.-->
   <Place5
