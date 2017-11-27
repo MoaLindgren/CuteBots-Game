@@ -46,7 +46,7 @@ public class AIBehaviour : MonoBehaviour
         {
             detectedPlayer = true;
         }
-        
+
 
     }
 
@@ -55,8 +55,11 @@ public class AIBehaviour : MonoBehaviour
 
         if (detectedPlayer && player.GetComponent<PlayerManager>().IsDetectable && !GM.GetComponent<InputManager>().GameIsPaused)
         {
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movement);
+            Vector3 relativePosition = player.transform.position - transform.position;
+            Quaternion rotation = Quaternion.LookRotation(relativePosition);
+            transform.rotation = rotation;
 
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movement);
 
         }
 
