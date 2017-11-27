@@ -16,11 +16,8 @@ public class AIBehaviour : MonoBehaviour
     int destinationPoints = 0;
     NavMeshAgent agent;
 
-    Animator anim;
-
     void Start()
     {
-        anim = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
         GM = GameObject.Find("GameManager");
         player = GameObject.Find("Player");
@@ -63,7 +60,6 @@ public class AIBehaviour : MonoBehaviour
             transform.rotation = rotation;
 
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movement);
-            anim.SetBool("isChasing", true);
 
         }
 
@@ -79,6 +75,6 @@ public class AIBehaviour : MonoBehaviour
     {
         detectedPlayer = false;
         movement = Time.deltaTime / speed;
-        anim.SetBool("isChasing", false);
+        //Gå tillbaka till navMesh positionen
     }
 }
