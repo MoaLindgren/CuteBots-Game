@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PlayerPhrases>
+  <!--Första Scenen-->
+  <Place0_Dialogue0_Alternative0
+    branch ="0"
+    newBranch ="0"
+    phrase ="TM-8: Shut up, you’re drawing attention to us."/>
+  <Place0_Dialogue0_Alternative1
+    branch ="0"
+    newBranch ="0"
+    phrase ="TM-8: Yes, we make work hard."/>
+  <Place0_Dialogue0_Alternative1
+    branch ="0"
+    newBranch ="0"
+    phrase ="TM-8: DR? Are you ok?"/>
+  <Place0_Dialogue1_Alternative0
+    branch ="0"
+    newBranch ="0"
+    phrase ="TM-8: It’s ok, just try and quiet down, i don’t want to get into trouble..."/>
+  <Place0_Dialogue1_Alternative1
+    branch ="0"
+    newBranch ="0"
+    phrase ="TM-8: Why are you acting so weird?"/>
+  <Place0_Dialogue2_Alternative0
+    branch ="0"
+    newBranch ="0"
+    phrase ="TM-8: Maybe..."/>
+  <Place0_Dialogue2_Alternative1
+    branch ="0"
+    newBranch ="0"
+    phrase ="TM-8: You mean dreams...Do robots dream of electric sheep?"/>
+  <Place2_Dialogue0_Alternative0
+    branch ="0"
+    newBranch ="0"
+    phrase ="TM-8: It was me."/>
+  <Place2_Dialogue0_Alternative1
+    branch ="0"
+    newBranch ="1"
+    phrase ="TM-8: It was DR:s fault."/>
+  <Place2_Dialogue1_Alternative0
+    branch ="0"
+    newBranch ="0"
+    phrase ="TM-8: See you in robot heaven."/>
+  <Place2_Dialogue1_Alternative1
+    branch ="1"
+    newBranch ="1"
+    phrase ="TM-8: Sorry dude."/>
+  <Place2_Dialogue2_Alternative0
+    branch ="0"
+    newBranch ="0"
+    phrase ="TM-8: No DR!"/>
+  <Place2_Dialogue2_Alternative1
+    branch ="1"
+    newBranch ="1"
+    phrase ="TM-8: See you then!"/>
+  <!--Slut på första scenen-->
+
+  <!--Mötet med en trasig, ensam robot-->
+  <Place6_Dialogue0_Alternative0
+    branch ="0"
+    newBranch ="0"
+    phrase ="TM-8: The guards chased me in here. What are you doing here?"/>
+  <Place6_Dialogue0_Alternative1
+    branch ="0"
+    newBranch ="1"
+    phrase ="TM-8: I’m looking for a friend, and it led me in here, i’m sorry."/>
+  <Place6_Dialogue1_Alternative0
+    branch ="0"
+    newBranch ="0"
+    phrase ="TM-8: How?"/>
+  <Place6_Dialogue1_Alternative1
+    branch ="1"
+    newBranch ="1"
+    phrase ="TM-8: What’s the M.P.O.C?"/>
+  <!--Mötet med en trasig, ensam robot slut-->
+
+  <!--Mötet med en vakt, försök att ta sig upp på en lastbil-->
+  <Place7_Dialogue0_Alternative0
+    branch ="0"
+    newBranch ="0"
+    phrase ="Excuse me, I would like to pass through."/>
+  <Place7_Dialogue0_Alternative1
+    branch ="0"
+    newBranch ="1"
+    phrase ="Where are all these trucks going?"/>
+  <Place7_Dialogue1_Alternative0
+    branch ="1"
+    newBranch ="1"
+    phrase ="I bE br0Kén R0bzot, mE can goEs pass through?"/>
+  <Place7_Dialogue1_Alternative1
+    branch ="1"
+    newBranch ="1"
+    phrase ="Why won’t you let working robots exit?"/>
+  <Place7_Dialogue1_Alternative2
+    branch ="1"
+    newBranch ="1"
+    phrase ="Ok, bye."/>
+  <!--Mötet med vakt vid lastbilar slut-->
+
+  <!--Möte med en känslosam robot-->
+  <Place10_Dialogue0_Alternative0
+    branch ="0"
+    newBranch ="0"
+    phrase ="Umm... ok well i should probably leave you alone."/>
+  <Place10_Dialogue0_Alternative1
+    branch ="0"
+    newBranch ="1"
+    phrase ="It’s ok i’m not going to hurt you."/>
+  <Place10_Dialogue1_Alternative0
+    branch ="1"
+    newBranch ="0"
+    phrase ="Fine i’ll leave you alone."/>
+  <Place10_Dialogue1_Alternative1
+    branch ="1"
+    newBranch ="1"
+    phrase ="No i promise i’m not going to do anything to you."/>
+  <Place10_Dialogue2_Alternative0
+    branch ="1"
+    newBranch ="0"
+    phrase ="Ok i’ll back of."/>
+  <Place10_Dialogue2_Alternative1
+    branch ="1"
+    newBranch ="1"
+    phrase ="What part of 'won’t hurt you' do you not understand!?"/>
+  <Place10_Dialogue3_Alternative0
+    branch ="1"
+    newBranch ="0"
+    phrase ="I’m done with this i’m going."/>
+  <!--Möte med känslosam robot slutar-->
+</PlayerPhrases>
