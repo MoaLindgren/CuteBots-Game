@@ -127,7 +127,7 @@ public class PlayerManager : MonoBehaviour
                 anim.SetBool("isRunning", false);
             }
             moveDirection = transform.TransformDirection(moveDirection);
-            if (moveDirection != Vector3.zero)
+            if (moveDirection != Vector3.zero && !pulling)
             {
                 model.transform.rotation = Quaternion.LookRotation(moveDirection);
             }
@@ -141,9 +141,8 @@ public class PlayerManager : MonoBehaviour
             }
             if (Input.GetButton("Jump") && !pulling)
             {
-                anim.SetBool("isRunning", false);
                 anim.SetBool("isJumping", true);
-
+                anim.SetBool("isRunning", false);
                 moveDirection.y = jumpHeight;
 
             }
