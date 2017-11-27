@@ -201,6 +201,12 @@ public class PlayerManager : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+
+        if(other.tag == "NextScene")
+        {
+            SceneManager.LoadScene("TheSlides");
+
+        }
     }
 
     void OnTriggerExit(Collider other) //När spelaren lämnar collidern återställs tidigare värden
