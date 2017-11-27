@@ -68,7 +68,7 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
-        
+
 
             
         if (SM == null)

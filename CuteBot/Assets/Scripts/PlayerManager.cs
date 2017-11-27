@@ -42,7 +42,7 @@ public class PlayerManager : MonoBehaviour
 
     Vector3 moveDirection = Vector3.zero;
 
-    Animator anim;
+    public Animator anim;
 
     public bool IsDetectable
     {
@@ -141,6 +141,7 @@ public class PlayerManager : MonoBehaviour
             if(Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f || Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f)
             {
                 anim.SetBool("isRunning", true);
+                
             }
             else
             {
@@ -157,27 +158,22 @@ public class PlayerManager : MonoBehaviour
             {
                 moveDirection *= movementSpeed;
             }
+
+          
+
             if (Input.GetButton("Jump"))
                 moveDirection.y = jumpHeight;
 
             
-            if (anim.isRunning == true)
-            {
-                mcSound.sfxPlayer.clip = mcSound.mcSfx[0];
-                mcSound.sfxPlayer.pitch = Random.Range(mcSound.lowPitchRange, mcSound.highPitchRange);          //Testa om detta funkar istället för velocityskiten
-                mcSound.sfxPlayer.volume = Random.Range(mcSound.lowPitchRange, mcSound.highPitchRange);
-
-            }
-
+            
+            
             if (controller.velocity.magnitude > 2 && mcSound.sfxPlayer.isPlaying == false)
             {
                 mcSound.sfxPlayer.clip = mcSound.mcSfx[0];
                  mcSound.sfxPlayer.pitch = Random.Range(mcSound.lowPitchRange, mcSound.highPitchRange);
                  mcSound.sfxPlayer.volume = Random.Range(mcSound.lowPitchRange, mcSound.highPitchRange);
 
-                mcSound.sfxPlayer.PlayDelayed(0.37f);      
-                
-              
+                mcSound.sfxPlayer.PlayDelayed(0.37f);
             }
             
            
