@@ -17,6 +17,3 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/Temporary.unity
     guid: ed18cc98a30fc214aa0ca6f776194dfa
-  - enabled: 1
-    path: Assets/Slides/TheSlides.unity
-    guid: 6212b647dcc572b4686763bc56f8243a

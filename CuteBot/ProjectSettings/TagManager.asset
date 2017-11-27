@@ -12,7 +12,6 @@ TagManager:
   - Broken Door
   - Locked Door
   - Death Zone
-  - NextScene
   layers:
   - Default
   - TransparentFX

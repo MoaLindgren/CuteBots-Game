@@ -1965,9 +1965,10 @@ MonoBehaviour:
   isDetectable: 1
   climbSpeed: 6
   gravity: 15
-  jumpHeight: 6
-  movementSpeed: 5
+  jumpHeight: 10
+  movementSpeed: 6
   pushForce: 2
+  station: {fileID: 0}
   model: {fileID: 1897647345298948}
 --- !u!124 &124377768286471480
 Behaviour:
